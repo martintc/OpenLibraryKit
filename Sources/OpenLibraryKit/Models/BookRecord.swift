@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct BookRecord: Codable {
+public struct BookRecord: Codable, Sendable {
     let isbns: [String]
     let issns: [String]
     let lccns: [String]
@@ -19,12 +19,12 @@ public struct BookRecord: Codable {
     let details: BookDetailsWrapper
 }
 
-public struct BookRecordResponse: Codable {
+public struct BookRecordResponse: Codable, Sendable {
     let records: [String: BookRecord]
     let items: [String]  // Currently an empty array
 }
 
-public struct BookData: Codable {
+public struct BookData: Codable, Sendable {
     let url: String
     let key: String
     let title: String
@@ -54,12 +54,12 @@ public struct BookData: Codable {
     }
 }
 
-public struct Author: Codable {
+public struct Author: Codable, Sendable {
     let url: String
     let name: String
 }
 
-public struct BookIdentifiers: Codable {
+public struct BookIdentifiers: Codable, Sendable {
     let isbn10: [String]?
     let isbn13: [String]?
     let openlibrary: [String]?
@@ -71,22 +71,22 @@ public struct BookIdentifiers: Codable {
     }
 }
 
-struct Publisher: Codable {
+struct Publisher: Codable, Sendable {
     let name: String
 }
 
-struct Subject: Codable {
+struct Subject: Codable, Sendable {
     let name: String
     let url: String
 }
 
-struct CoverImages: Codable {
+struct CoverImages: Codable, Sendable {
     let small: String
     let medium: String
     let large: String
 }
 
-struct BookDetailsWrapper: Codable {
+struct BookDetailsWrapper: Codable, Sendable {
     let bibKey: String
     let infoURL: String
     let preview: String
@@ -104,17 +104,17 @@ struct BookDetailsWrapper: Codable {
     }
 }
 
-struct BookDetails: Codable {
+struct BookDetails: Codable, Sendable {
     struct TypeInfo: Codable {
         let key: String
     }
 
-    struct SimpleAuthor: Codable {
+    struct SimpleAuthor: Codable, Sendable {
         let key: String
         let name: String
     }
 
-    struct DateValue: Codable {
+    struct DateValue: Codable, Sendable {
         let type: String
         let value: String
     }
@@ -163,6 +163,6 @@ struct BookDetails: Codable {
     }
 }
 
-struct Work: Codable {
+struct Work: Codable, Sendable {
     let key: String
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Doc: Codable {
+public struct Doc: Codable, Sendable {
     let coverID: Int?
     let hasFullText: Bool?
     let editionCount: Int?
