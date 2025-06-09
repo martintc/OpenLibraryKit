@@ -8,16 +8,16 @@
 import Foundation
 
 public struct Doc: Codable, Sendable {
-    let coverID: Int?
-    let hasFullText: Bool?
-    let editionCount: Int?
-    let title: String?
-    let authorNames: [String]?
-    let firstPublishYear: Int?
-    let key: String?
-    let iaIDs: [String]?
-    let authorKeys: [String]?
-    let publicScan: Bool?
+    public let coverID: Int?
+    public let hasFullText: Bool?
+    public let editionCount: Int?
+    public let title: String?
+    public let authorNames: [String]?
+    public let firstPublishYear: Int?
+    public let key: String?
+    public let iaIDs: [String]?
+    public let authorKeys: [String]?
+    public let publicScan: Bool?
 
     enum CodingKeys: String, CodingKey {
         case coverID = "cover_i"

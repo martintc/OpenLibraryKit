@@ -8,14 +8,14 @@
 import Foundation
 
 public struct SearchResponse: Codable, Sendable {
-    let numFound: Int
-    let start: Int
-    let numFoundExact: Bool
-    let numFoundAlternative: Int
-    let documentationURL: String
-    let query: String
-    let offset: Int?
-    let docs: [Doc]
+    public let numFound: Int
+    public let start: Int
+    public let numFoundExact: Bool
+    public let numFoundAlternative: Int
+    public let documentationURL: String
+    public let query: String
+    public let offset: Int?
+    public let docs: [Doc]
 
     enum CodingKeys: String, CodingKey {
         case numFound
