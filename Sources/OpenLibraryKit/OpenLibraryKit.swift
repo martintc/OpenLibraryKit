@@ -3,21 +3,21 @@
 
 import Foundation
 
-enum OpenLibraryError: Error {
+public enum OpenLibraryError: Error {
     case invalidURL
     case invalidResponse
     case httpError(Int)
     case decodingError(Error)
 }
 
-enum Size: String {
+public enum Size: String {
     case small = "S"
     case medium = "M"
     case large = "L"
 }
 
 public final class OpenLibraryClient: @unchecked Sendable {
-    static let shared = OpenLibraryClient()
+    public static let shared = OpenLibraryClient()
 
     private var baseUrl = "https://openlibrary.org/"
     private var search = "search.json"
@@ -35,7 +35,7 @@ public final class OpenLibraryClient: @unchecked Sendable {
 
     private init() {}
 
-    func searchByTitle(_ title: String) async throws -> SearchResponse {
+    public func searchByTitle(_ title: String) async throws -> SearchResponse {
         let requestUrl = baseUrl + search + "?title=\(title.urlSafeString)"
         do {
             return try await search(url: requestUrl)
@@ -44,7 +44,7 @@ public final class OpenLibraryClient: @unchecked Sendable {
         }
     }
 
-    func searchByAuthor(_ author: String) async throws -> SearchResponse {
+    public func searchByAuthor(_ author: String) async throws -> SearchResponse {
         let requestUrl = baseUrl + search + "?author=\(author.urlSafeString)&sort=new"
         do {
             return try await search(url: requestUrl)
@@ -72,7 +72,7 @@ public final class OpenLibraryClient: @unchecked Sendable {
         return try decoder.decode(SearchResponse.self, from: data)
     }
 
-    func isbnSearch(isbn: String) async throws -> BookRecordResponse {
+    public func isbnSearch(isbn: String) async throws -> BookRecordResponse {
         let url = baseUrl + isbnPath + isbn.isbnQueryable
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "GET"
@@ -92,7 +92,7 @@ public final class OpenLibraryClient: @unchecked Sendable {
         return try decoder.decode(BookRecordResponse.self, from: data)
     }
 
-    func getCoverUrl(isbn: String, size: Size = Size.small) -> String {
+    public func getCoverUrl(isbn: String, size: Size = Size.small) -> String {
         return "https://covers.openlibrary.org/b/isbn/\(isbn)-\(size.rawValue).jpg"
     }
 }

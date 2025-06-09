@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchResponse: Codable {
+public struct SearchResponse: Codable {
     let numFound: Int
     let start: Int
     let numFoundExact: Bool
@@ -28,4 +28,3 @@ struct SearchResponse: Codable {
         case docs
     }
 }
-

@@ -7,8 +7,7 @@
 
 import Foundation
 
-// One document in the search result
-struct Doc: Codable {
+public struct Doc: Codable {
     let coverID: Int?
     let hasFullText: Bool?
     let editionCount: Int?

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookRecord: Codable {
+public struct BookRecord: Codable {
     let isbns: [String]
     let issns: [String]
     let lccns: [String]
@@ -19,12 +19,12 @@ struct BookRecord: Codable {
     let details: BookDetailsWrapper
 }
 
-struct BookRecordResponse: Codable {
+public struct BookRecordResponse: Codable {
     let records: [String: BookRecord]
-    let items: [String] // Currently an empty array
+    let items: [String]  // Currently an empty array
 }
 
-struct BookData: Codable {
+public struct BookData: Codable {
     let url: String
     let key: String
     let title: String
@@ -37,7 +37,7 @@ struct BookData: Codable {
     let subjects: [Subject]
     let notes: String?
     let cover: CoverImages
-    
+
     enum CodingKeys: String, CodingKey {
         case url = "url"
         case key = "key"
@@ -54,12 +54,12 @@ struct BookData: Codable {
     }
 }
 
-struct Author: Codable {
+public struct Author: Codable {
     let url: String
     let name: String
 }
 
-struct BookIdentifiers: Codable {
+public struct BookIdentifiers: Codable {
     let isbn10: [String]?
     let isbn13: [String]?
     let openlibrary: [String]?
@@ -166,4 +166,3 @@ struct BookDetails: Codable {
 struct Work: Codable {
     let key: String
 }
-
