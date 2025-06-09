@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SearchResponse: Codable, Sendable {
+public struct SearchResponse: Codable, Sendable, Hashable, Equatable {
     public let numFound: Int
     public let start: Int
     public let numFoundExact: Bool
