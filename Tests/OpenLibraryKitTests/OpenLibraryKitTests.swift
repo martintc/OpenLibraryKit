@@ -1,38 +1,26 @@
 import Testing
+
 @testable import OpenLibraryKit
 
 @Test func searchByTitle() async throws {
-    do {
-        OpenLibraryClient.shared.userAgent = "test/1.0 (example@example.com)"
-        let response = try await OpenLibraryClient.shared.searchByTitle("lord of the rings")
-        print(response)
-        #expect(response.docs.count > 0)
-    } catch {
-        print("Error: \(error)")
-    }
+    OpenLibraryClient.shared.userAgent = "test/1.0 (example@example.com)"
+    let response = try await OpenLibraryClient.shared.searchByTitle("lord of the rings")
+    #expect(response.docs.count > 0)
 }
 
 @Test func searchByAuthor() async throws {
-    do {
-        OpenLibraryClient.shared.userAgent = "test/1.0 (example@example.com)"
-        let response = try await OpenLibraryClient.shared.searchByAuthor("J.R.R. Tolkien")
-        print(response)
-        #expect(response.docs.count > 0)
-    } catch {
-        print("Error: \(error)")
-    }
+    OpenLibraryClient.shared.userAgent = "test/1.0 (example@example.com)"
+    let response = try await OpenLibraryClient.shared.searchByAuthor("J.R.R. Tolkien")
+    #expect(response.docs.count > 0)
 }
 
 @Test func isbnSearch() async throws {
-    do {
-        OpenLibraryClient.shared.userAgent = "test/1.0 (example@example.com)"
-        let isbn = "9780593650868"
-        let response = try await OpenLibraryClient.shared.isbnSearch(isbn: isbn)
-        print(response)
-        #expect(response.records.count > 0)
-    } catch {
-        print("Error: \(error)")
-    }
+    OpenLibraryClient.shared.userAgent = "test/1.0 (example@example.com)"
+    // let isbn = "9780593650868"
+    let isbn = "9780822342649"
+    let response = try await OpenLibraryClient.shared.isbnSearch(isbn: isbn)
+    // print(response)
+    #expect(response.records.count > 0)
 }
 
 @Test func getCoverUrl() async throws {
