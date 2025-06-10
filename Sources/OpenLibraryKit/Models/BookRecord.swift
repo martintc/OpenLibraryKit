@@ -7,16 +7,16 @@
 
 import Foundation
 
-enum Notes: Codable {
+public enum Notes: Codable, Sendable {
     case string(String)
     case object(NotesObject)
 
-    struct NotesObject: Codable {
-        let type: String
-        let value: String
+    public struct NotesObject: Codable, Sendable {
+        public let type: String
+        public let value: String
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let str = try? container.decode(String.self) {
             self = .string(str)
@@ -32,7 +32,7 @@ enum Notes: Codable {
         }
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case .string(let str):
@@ -42,7 +42,7 @@ enum Notes: Codable {
         }
     }
 
-    var text: String? {
+    public var text: String? {
         switch self {
         case .string(let str):
             return str
@@ -53,35 +53,35 @@ enum Notes: Codable {
 }
 
 public struct BookRecord: Codable, Sendable {
-    let isbns: [String]
-    let issns: [String]
-    let lccns: [String]
-    let oclcs: [String]
-    let olids: [String]
-    let publishDates: [String]
-    let recordURL: String
-    let data: BookData
-    let details: BookDetailsWrapper
+    public let isbns: [String]
+    public let issns: [String]
+    public let lccns: [String]
+    public let oclcs: [String]
+    public let olids: [String]
+    public let publishDates: [String]
+    public let recordURL: String
+    public let data: BookData
+    public let details: BookDetailsWrapper
 }
 
 public struct BookRecordResponse: Codable, Sendable {
-    let records: [String: BookRecord]
-    let items: [String]  // Currently an empty array
+    public let records: [String: BookRecord]
+    public let items: [String]  // Currently an empty array
 }
 
 public struct BookData: Codable, Sendable {
-    let url: String
-    let key: String
-    let title: String
-    let subtitle: String?
-    let authors: [Author]
-    let numberOfPages: Int?
-    let identifiers: BookIdentifiers
-    let publishers: [Publisher]
-    let publishDate: String
-    let subjects: [Subject]
-    let notes: Notes?
-    let cover: CoverImages
+    public let url: String
+    public let key: String
+    public let title: String
+    public let subtitle: String?
+    public let authors: [Author]
+    public let numberOfPages: Int?
+    public let identifiers: BookIdentifiers
+    public let publishers: [Publisher]
+    public let publishDate: String
+    public let subjects: [Subject]
+    public let notes: Notes?
+    public let cover: CoverImages
 
     enum CodingKeys: String, CodingKey {
         case url = "url"
@@ -100,14 +100,14 @@ public struct BookData: Codable, Sendable {
 }
 
 public struct Author: Codable, Sendable {
-    let url: String
-    let name: String
+    public let url: String
+    public let name: String
 }
 
 public struct BookIdentifiers: Codable, Sendable {
-    let isbn10: [String]?
-    let isbn13: [String]?
-    let openlibrary: [String]?
+    public let isbn10: [String]?
+    public let isbn13: [String]?
+    public let openlibrary: [String]?
 
     enum CodingKeys: String, CodingKey {
         case isbn10 = "isbn_10"
@@ -116,28 +116,28 @@ public struct BookIdentifiers: Codable, Sendable {
     }
 }
 
-struct Publisher: Codable, Sendable {
-    let name: String
+public struct Publisher: Codable, Sendable {
+    public let name: String
 }
 
-struct Subject: Codable, Sendable {
-    let name: String
-    let url: String
+public struct Subject: Codable, Sendable {
+    public let name: String
+    public let url: String
 }
 
-struct CoverImages: Codable, Sendable {
-    let small: String
-    let medium: String
-    let large: String
+public struct CoverImages: Codable, Sendable {
+    public let small: String
+    public let medium: String
+    public let large: String
 }
 
-struct BookDetailsWrapper: Codable, Sendable {
-    let bibKey: String
-    let infoURL: String
-    let preview: String
-    let previewURL: String
-    let thumbnailURL: String
-    let details: BookDetails
+public struct BookDetailsWrapper: Codable, Sendable {
+    public let bibKey: String
+    public let infoURL: String
+    public let preview: String
+    public let previewURL: String
+    public let thumbnailURL: String
+    public let details: BookDetails
 
     enum CodingKeys: String, CodingKey {
         case bibKey = "bib_key"
@@ -149,44 +149,44 @@ struct BookDetailsWrapper: Codable, Sendable {
     }
 }
 
-struct BookDetails: Codable, Sendable {
-    struct TypeInfo: Codable {
-        let key: String
+public struct BookDetails: Codable, Sendable {
+    public struct TypeInfo: Codable, Sendable {
+        public let key: String
     }
 
-    struct SimpleAuthor: Codable, Sendable {
-        let key: String
-        let name: String
+    public struct SimpleAuthor: Codable, Sendable {
+        public let key: String
+        public let name: String
     }
 
-    struct DateValue: Codable, Sendable {
-        let type: String
-        let value: String
+    public struct DateValue: Codable, Sendable {
+        public let type: String
+        public let value: String
     }
 
-    let type: TypeInfo
-    let authors: [SimpleAuthor]
-    let fullTitle: String?
-    let notes: Notes?
-    let numberOfPages: Int?
-    let physicalFormat: String?
-    let publishDate: String?
-    let publishers: [String]?
-    let sourceRecords: [String]?
-    let subtitle: String?
-    let title: String
-    let covers: [Int]?
-    let works: [Work]?
-    let key: String
-    let identifiers: [String: [String]]?
-    let isbn10: [String]?
-    let isbn13: [String]?
-    let classifications: [String: [String]]?
-    let localID: [String]?
-    let latestRevision: Int?
-    let revision: Int?
-    let created: DateValue?
-    let lastModified: DateValue?
+    public let type: TypeInfo
+    public let authors: [SimpleAuthor]
+    public let fullTitle: String?
+    public let notes: Notes?
+    public let numberOfPages: Int?
+    public let physicalFormat: String?
+    public let publishDate: String?
+    public let publishers: [String]?
+    public let sourceRecords: [String]?
+    public let subtitle: String?
+    public let title: String
+    public let covers: [Int]?
+    public let works: [Work]?
+    public let key: String
+    public let identifiers: [String: [String]]?
+    public let isbn10: [String]?
+    public let isbn13: [String]?
+    public let classifications: [String: [String]]?
+    public let localID: [String]?
+    public let latestRevision: Int?
+    public let revision: Int?
+    public let created: DateValue?
+    public let lastModified: DateValue?
 
     enum CodingKeys: String, CodingKey {
         case type, authors
@@ -208,6 +208,6 @@ struct BookDetails: Codable, Sendable {
     }
 }
 
-struct Work: Codable, Sendable {
-    let key: String
+public struct Work: Codable, Sendable {
+    public let key: String
 }
