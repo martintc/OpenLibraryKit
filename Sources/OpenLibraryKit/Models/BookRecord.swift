@@ -7,6 +7,51 @@
 
 import Foundation
 
+enum Notes: Codable {
+    case string(String)
+    case object(NotesObject)
+
+    struct NotesObject: Codable {
+        let type: String
+        let value: String
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let str = try? container.decode(String.self) {
+            self = .string(str)
+        } else if let obj = try? container.decode(NotesObject.self) {
+            self = .object(obj)
+        } else {
+            throw DecodingError.typeMismatch(
+                Notes.self,
+                DecodingError.Context(
+                    codingPath: decoder.codingPath,
+                    debugDescription: "Expected String or NotesObject for notes"
+                ))
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .string(let str):
+            try container.encode(str)
+        case .object(let obj):
+            try container.encode(obj)
+        }
+    }
+
+    var text: String? {
+        switch self {
+        case .string(let str):
+            return str
+        case .object(let obj):
+            return obj.value
+        }
+    }
+}
+
 public struct BookRecord: Codable, Sendable {
     let isbns: [String]
     let issns: [String]
@@ -35,7 +80,7 @@ public struct BookData: Codable, Sendable {
     let publishers: [Publisher]
     let publishDate: String
     let subjects: [Subject]
-    let notes: String?
+    let notes: Notes?
     let cover: CoverImages
 
     enum CodingKeys: String, CodingKey {
@@ -122,7 +167,7 @@ struct BookDetails: Codable, Sendable {
     let type: TypeInfo
     let authors: [SimpleAuthor]
     let fullTitle: String?
-    let notes: String?
+    let notes: Notes?
     let numberOfPages: Int?
     let physicalFormat: String?
     let publishDate: String?
